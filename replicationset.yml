@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-rs
+  labels:
+    app: auth-app5
+#pod portion
+spec:
+  template:
+    metadata:
+      name: my-pod3
+      labels:
+        app: auth-app5
+        #container portion  
+    spec:
+      containers:
+        - name: my-cont-4
+          image: httpd
+          ports:
+            - containerPort: 80
+  replicas: 4
+  selector:
+    matchLabels:
+      app: auth-app5
