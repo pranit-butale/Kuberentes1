@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: my-deploy
+  labels:
+    app: game-app
+spec:
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        app: game-app
+    spec:
+      containers:
+         - name: my-cont-4
+           image: httpd
+           ports:
+            - containerPort: 80
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: game-app
