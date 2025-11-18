@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: my-pod-login
+  labels:
+    app: login-app
+spec:
+  containers:
+    - name: my-cont-login
+      image: httpd
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: my-svc-login
+spec:
+  ports:
+    - targetPort: 80
+      port: 80
+      protocol: TCP
+  selector:
+    app: login-app
+  type: NodePort
+    
