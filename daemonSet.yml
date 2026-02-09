@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-ds
+  labels:
+    app: ds-auth-app
+spec:
+  template:
+    metadata:
+      name: my-ds-pod
+      labels:
+        app: ds-auth-app
+    spec:
+      containers:
+        - name: nginx-cont
+          image: nginx
+          ports:
+            - containerPort: 80
+ # replicas: 4 
+  selector: 
+    matchLabels:
+      app: ds-auth-app
+      
+
+---
+
+
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: my-ds-svc
+   spec:
+      ports:
+        - targetPort: 80
+          port: 80
+          protocol: TCP
+          name: cont-port
+      selector:
+         app: ds-auth-app
+      type: NodePort
